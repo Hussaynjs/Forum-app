@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\Posts\PostService;
+use App\Services\Posts\EloquentPostService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PostService::class, EloquentPostService::class);
     }
 
     /**
