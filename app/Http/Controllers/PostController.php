@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Contracts\Posts\PostService;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Post;
 use Inertia\Inertia;
 
 class PostController extends Controller
 {
+    public function __construct(private readonly PostService $posts)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Posts/Index', 
-        [
-            "posts" => Post::all()
+        return Inertia::render('Posts/Index', [
+            'posts' => $this->posts->all(),
         ]);
     }
 
